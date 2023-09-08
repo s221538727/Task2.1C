@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ToDo App</title>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <div id="vue_app">
+      <div class="header">
+        <div class="container">
+          <div class="logo">ToDo List</div>
+          <div class="form">
+            <input
+              type="text"
+              v-bind:value="TodoItem"
+              v-on:input="handleInput"
+              v-on:keypress.enter="newTodo"
+            />
+            <button class="btn" v-on:click="newTodo">Add Task</button>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <h2>
+          <span>To Do</span>
+          <span class="mask-num">{{ needDoList.length }}</span>
+        </h2>
+        <ul class="mask-list">
+          <li v-for="(mask, index) in needDoList" :key="mask.id">
+            <div>
+              <input type="checkbox" v-on:change="doCheck(index, 'need')" />
+              <span>{{ mask.title }}</span>
+            </div>
+            <button class="btn-remove" v-on:click="removeMask(index, 'need')">
+              Remove
+            </button>
+          </li>
+        </ul>
+        <h2>
+          <span>Done</span>
+          <span class="mask-num">{{ completeList.length }}</span>
+        </h2>
+        <ul class="mask-list complete-list">
+          <li v-for="(mask, index) in completeList" :key="mask.id">
+            <div>
+              <input
+                type="checkbox"
+                v-on:change="doCheck(index, 'complete')"
+                checked
+              />
+              <span>{{ mask.title }}</span>
+            </div>
+            <button
+              class="btn-remove"
+              v-on:click="removeMask(index, 'complete')"
+            >
+              Remove
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
